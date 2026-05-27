@@ -109,29 +109,33 @@ void GameRenderer::drawCells(const GameGrid& grid) {
 }
 
 void GameRenderer::drawGrid(const GameGrid& grid) {
-    int startX = m_offsetX / m_cellSize;
-    int startY = m_offsetY / m_cellSize;
-    int endX = startX + m_screenWidth / m_cellSize + 2;
-    int endY = startY + m_screenHeight / m_cellSize + 2;
+    int leftBound   = -m_offsetX;
+    int rightBound  = grid.getWidth() * m_cellSize - m_offsetX;
+    int topBound    = -m_offsetY;
+    int bottomBound = grid.getHeight() * m_cellSize - m_offsetY;
+
+    int startY = std::max(0, m_offsetY / m_cellSize);
+    int endY   = std::min(grid.getHeight(), startY + m_screenHeight / m_cellSize + 2);
     for (int y = startY; y <= endY; ++y) {
-        if (y < 0 || y > grid.getHeight()) continue;
         int screenY = y * m_cellSize - m_offsetY;
-        if (screenY > m_screenHeight) continue;
-        int leftX = (startX * m_cellSize - m_offsetX);
-        if (leftX < 0) leftX = 0;
-        int rightX = (endX * m_cellSize - m_offsetX);
-        if (rightX > m_screenWidth) rightX = m_screenWidth;
-        DrawLine(leftX, screenY, rightX, screenY, LIGHTGRAY);
+        if (screenY < 0 || screenY > m_screenHeight) continue;
+        int lineStartX = std::max(0, leftBound);
+        int lineEndX   = std::min(m_screenWidth, rightBound);
+        if (lineStartX < lineEndX) {
+            DrawLine(lineStartX, screenY, lineEndX, screenY, LIGHTGRAY);
+        }
     }
+
+    int startX = std::max(0, m_offsetX / m_cellSize);
+    int endX   = std::min(grid.getWidth(), startX + m_screenWidth / m_cellSize + 2);
     for (int x = startX; x <= endX; ++x) {
-        if (x < 0 || x > grid.getWidth()) continue;
         int screenX = x * m_cellSize - m_offsetX;
-        if (screenX > m_screenWidth) continue;
-        int topY = (startY * m_cellSize - m_offsetY);
-        if (topY < 0) topY = 0;
-        int bottomY = (endY * m_cellSize - m_offsetY);
-        if (bottomY > m_screenHeight) bottomY = m_screenHeight;
-        DrawLine(screenX, topY, screenX, bottomY, LIGHTGRAY);
+        if (screenX < 0 || screenX > m_screenWidth) continue;
+        int lineStartY = std::max(0, topBound);
+        int lineEndY   = std::min(m_screenHeight, bottomBound);
+        if (lineStartY < lineEndY) {
+            DrawLine(screenX, lineStartY, screenX, lineEndY, LIGHTGRAY);
+        }
     }
 }
 

@@ -1,41 +1,18 @@
-# Compiled files
+# Скомпилированные файлы
 *.exe
-*.exe~
 *.o
 *.obj
 *.dll
-*.lib
-*.a
-*.so
-*.dylib
+*.exe.stackdump
 
-# Debug files
-*.pdb
-*.ilk
-*.exp
-
-# Build output folders
-build/
-bin/
-obj/
-out/
-
-# IDE files
+# Папки IDE
 .vscode/
 .idea/
+
+# Временные файлы
 *.swp
-*.swo
-*~
-.DS_Store
-
-# Raylib specific – if you copied dll to project folder
-raylib.dll
-
-# Backup files
-*.bak
 *.tmp
 *.log
 
-# Windows specific
-Thumbs.db
-desktop.ini
+# Сборки (если будете использовать папку build)
+build/

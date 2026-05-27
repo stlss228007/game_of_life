@@ -1,17 +1,41 @@
-# Скомпилированные файлы
+# Compiled files
 *.exe
+*.exe~
 *.o
 *.obj
 *.dll
 *.lib
+*.a
+*.so
+*.dylib
 
-# Файлы IDE (VS Code, и т.п.)
+# Debug files
+*.pdb
+*.ilk
+*.exp
+
+# Build output folders
+build/
+bin/
+obj/
+out/
+
+# IDE files
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+.DS_Store
 
-# Временные файлы
+# Raylib specific – if you copied dll to project folder
+raylib.dll
+
+# Backup files
+*.bak
 *.tmp
 *.log
 
-# Скомпилированные бинарные файлы Raylib (если вы их скопировали в проект)
-raylib.dll
+# Windows specific
+Thumbs.db
+desktop.ini

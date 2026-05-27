@@ -1,0 +1,7 @@
+# Автоматически определять text/binary для файлов, основываясь на их содержимом
+* text=auto
+
+# Явно указать, что файлы .a и .dll являются бинарными
+libs/raylib/lib/*.dll binary
+libs/raylib/lib/*.a binary
+*.exe binary
